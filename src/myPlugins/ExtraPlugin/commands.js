@@ -1,6 +1,7 @@
-import grapesjs from 'grapesjs';
-export const commandNameCustomCode = 'custom-code:open-modal';
-export const keyCustomCode = 'custom-code-plugin__code';
+/* eslint-disable import/no-anonymous-default-export */
+import grapesjs from "grapesjs";
+export const commandNameCustomCode = "custom-code:open-modal";
+export const keyCustomCode = "custom-code-plugin__code";
 // import { commandNameCustomCode, keyCustomCode } from './utils';
 
 export default (editor, opts = {}) => {
@@ -8,11 +9,11 @@ export default (editor, opts = {}) => {
 
   const appendToContent = (target, content) => {
     if (content instanceof HTMLElement) {
-        target.appendChild(content);
+      target.appendChild(content);
     } else if (content) {
-        target.insertAdjacentHTML('beforeend', content);
+      target.insertAdjacentHTML("beforeend", content);
     }
-  }
+  };
 
   // Add the custom code command
   editor.Commands.add(commandNameCustomCode, {
@@ -23,7 +24,7 @@ export default (editor, opts = {}) => {
       // @ts-ignore
       this.target = target;
 
-      if (target?.get('editable')) {
+      if (target?.get("editable")) {
         // @ts-ignore
         this.showCustomCode(target, opts);
       }
@@ -33,15 +34,14 @@ export default (editor, opts = {}) => {
       editor.Modal.close();
     },
 
-   
     showCustomCode(target, options) {
       const title = options.title || modalTitle;
-      const code = target.get(keyCustomCode) || '';
+      const code = target.get(keyCustomCode) || "";
       // @ts-ignore
       const content = this.getContent();
-      editor.Modal
-        .open({ title, content })
-        .onceClose(() => editor.stopCommand(commandNameCustomCode))
+      editor.Modal.open({ title, content }).onceClose(() =>
+        editor.stopCommand(commandNameCustomCode)
+      );
       // @ts-ignore
       this.getCodeViewer().setContent(code);
     },
@@ -56,12 +56,11 @@ export default (editor, opts = {}) => {
      */
     getPostContent() {},
 
-    
     getContent() {
       // @ts-ignore
       const codeViewer = this.getCodeViewer();
-      const content = document.createElement('div');
-      const pfx = editor.getConfig('stylePrefix');
+      const content = document.createElement("div");
+      const pfx = editor.getConfig("stylePrefix");
       content.className = `${pfx}custom-code`;
       // @ts-ignore
       appendToContent(content, this.getPreContent());
@@ -71,7 +70,7 @@ export default (editor, opts = {}) => {
       // @ts-ignore
       appendToContent(content, this.getContentActions());
       codeViewer.refresh();
-      setTimeout(()=> codeViewer.focus(), 0);
+      setTimeout(() => codeViewer.focus(), 0);
 
       return content;
     },
@@ -81,9 +80,9 @@ export default (editor, opts = {}) => {
      * @return {HTMLElement|String}
      */
     getContentActions() {
-      const btn = document.createElement('button');
-      btn.setAttribute('type', 'button');
-      const pfx = editor.getConfig('stylePrefix');
+      const btn = document.createElement("button");
+      btn.setAttribute("type", "button");
+      const pfx = editor.getConfig("stylePrefix");
       btn.innerHTML = opts.buttonLabel;
       btn.className = `${pfx}btn-prim ${pfx}btn-import__custom-code`;
       // @ts-ignore
@@ -113,8 +112,8 @@ export default (editor, opts = {}) => {
       if (!this.codeViewer) {
         // @ts-ignore
         this.codeViewer = editor.CodeManager.createViewer({
-          codeName: 'htmlmixed',
-          theme: 'hopscotch',
+          codeName: "htmlmixed",
+          theme: "hopscotch",
           readOnly: 0,
           ...codeViewOptions,
         });
