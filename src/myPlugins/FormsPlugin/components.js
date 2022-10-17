@@ -1,46 +1,48 @@
-import grapesjs from 'grapesjs';
+/* eslint-disable eqeqeq */
+/* eslint-disable import/no-anonymous-default-export */
+import grapesjs from "grapesjs";
 
-export const typeForm = 'form';
-export const typeInput = 'input';
-export const typeTextarea = 'textarea';
-export const typeSelect = 'select';
-export const typeCheckbox = 'checkbox';
-export const typeRadio = 'radio';
-export const typeButton = 'button';
-export const typeLabel = 'label';
-export const typeOption = 'option';
+export const typeForm = "form";
+export const typeInput = "input";
+export const typeTextarea = "textarea";
+export const typeSelect = "select";
+export const typeCheckbox = "checkbox";
+export const typeRadio = "radio";
+export const typeButton = "button";
+export const typeLabel = "label";
+export const typeOption = "option";
 
-export default function(editor) {
+export default function (editor) {
   const { Components } = editor;
 
   const idTrait = {
-    name: 'id',
+    name: "id",
   };
 
   const forTrait = {
-    name: 'for',
+    name: "for",
   };
 
   const nameTrait = {
-    name: 'name',
+    name: "name",
   };
 
   const placeholderTrait = {
-    name: 'placeholder',
+    name: "placeholder",
   };
 
   const valueTrait = {
-    name: 'value',
+    name: "value",
   };
 
   const requiredTrait = {
-    type: 'checkbox',
-    name: 'required',
+    type: "checkbox",
+    name: "required",
   };
 
   const checkedTrait = {
-    type: 'checkbox',
-    name: 'checked',
+    type: "checkbox",
+    name: "checked",
   };
 
   const createOption = (value, content) => {
@@ -48,30 +50,33 @@ export default function(editor) {
   };
 
   const checkIfInPreview = (ev) => {
-    if (!editor.Commands.isActive('preview')) {
+    if (!editor.Commands.isActive("preview")) {
       ev.preventDefault();
     }
   };
 
   Components.addType(typeForm, {
-    isComponent: el => el.tagName == 'FORM',
+    isComponent: (el) => el.tagName == "FORM",
 
     model: {
       defaults: {
-        tagName: 'form',
-        droppable: ':not(form)',
-        draggable: ':not(form)',
-        attributes: { method: 'get' },
-        traits: [{
-          type: 'select',
-          name: 'method',
-          options: [
-            {value: 'get', name: 'GET'},
-            {value: 'post', name: 'POST'},
-          ],
-        }, {
-          name: 'action',
-        }],
+        tagName: "form",
+        droppable: ":not(form)",
+        draggable: ":not(form)",
+        attributes: { method: "get" },
+        traits: [
+          {
+            type: "select",
+            name: "method",
+            options: [
+              { value: "get", name: "GET" },
+              { value: "post", name: "POST" },
+            ],
+          },
+          {
+            name: "action",
+          },
+        ],
       },
     },
 
@@ -80,83 +85,67 @@ export default function(editor) {
         // The submit of the form might redirect the user from the editor so
         // we should always prevent the default here.
         submit: (e) => e.preventDefault(),
-      }
+      },
     },
   });
 
-
-
-
-
   // INPUT
   Components.addType(typeInput, {
-    isComponent: el => el.tagName == 'INPUT',
+    isComponent: (el) => el.tagName == "INPUT",
 
     model: {
       defaults: {
-        tagName: 'input',
+        tagName: "input",
         droppable: false,
         highlightable: false,
-        attributes: { type: 'text' },
+        attributes: { type: "text" },
         traits: [
           nameTrait,
           placeholderTrait,
           {
-            type: 'select',
-            name: 'type',
+            type: "select",
+            name: "type",
             options: [
-              { value: 'text' },
-              { value: 'email' },
-              { value: 'password' },
-              { value: 'number' },
-            ]
+              { value: "text" },
+              { value: "email" },
+              { value: "password" },
+              { value: "number" },
+            ],
           },
-          requiredTrait
+          requiredTrait,
         ],
       },
     },
 
-    extendFnView: ['updateAttributes'],
+    extendFnView: ["updateAttributes"],
     view: {
       updateAttributes() {
-        this.el.setAttribute('autocomplete', 'off');
-      },
-    }
-  });
-
-
-
-
-
-  // TEXTAREA
-  Components.addType(typeTextarea, {
-    extend: typeInput,
-    isComponent: el => el.tagName == 'TEXTAREA',
-
-    model: {
-      defaults: {
-        tagName: 'textarea',
-        attributes: {},
-        traits: [
-          nameTrait,
-          placeholderTrait,
-          requiredTrait
-        ]
+        this.el.setAttribute("autocomplete", "off");
       },
     },
   });
 
-
-
-
-
-  // OPTION
-  Components.addType(typeOption, {
-    isComponent: el => el.tagName == 'OPTION',
+  // TEXTAREA
+  Components.addType(typeTextarea, {
+    extend: typeInput,
+    isComponent: (el) => el.tagName == "TEXTAREA",
 
     model: {
       defaults: {
-        tagName: 'option',
+        tagName: "textarea",
+        attributes: {},
+        traits: [nameTrait, placeholderTrait, requiredTrait],
+      },
+    },
+  });
+
+  // OPTION
+  Components.addType(typeOption, {
+    isComponent: (el) => el.tagName == "OPTION",
+
+    model: {
+      defaults: {
+        tagName: "option",
         layerable: false,
         droppable: false,
         draggable: false,
@@ -165,29 +154,25 @@ export default function(editor) {
     },
   });
 
-
-
-
-
   // SELECT
   Components.addType(typeSelect, {
     extend: typeInput,
-    isComponent: el => el.tagName == 'SELECT',
+    isComponent: (el) => el.tagName == "SELECT",
 
     model: {
       defaults: {
-        tagName: 'select',
+        tagName: "select",
         components: [
-          createOption('opt1', 'Option 1'),
-          createOption('opt2', 'Option 2'),
+          createOption("opt1", "Option 1"),
+          createOption("opt2", "Option 2"),
         ],
         traits: [
           nameTrait,
           {
-            name: 'options',
-            type: 'select-options'
+            name: "options",
+            type: "select-options",
           },
-          requiredTrait
+          requiredTrait,
         ],
       },
     },
@@ -199,26 +184,16 @@ export default function(editor) {
     },
   });
 
-
-
-
-
   // CHECKBOX
   Components.addType(typeCheckbox, {
     extend: typeInput,
-    isComponent: (el) => el.tagName == 'INPUT' && (el).type == 'checkbox',
+    isComponent: (el) => el.tagName == "INPUT" && el.type == "checkbox",
 
     model: {
       defaults: {
         copyable: false,
-        attributes: { type: 'checkbox' },
-        traits: [
-          idTrait,
-          nameTrait,
-          valueTrait,
-          requiredTrait,
-          checkedTrait
-        ],
+        attributes: { type: "checkbox" },
+        traits: [idTrait, nameTrait, valueTrait, requiredTrait, checkedTrait],
       },
     },
 
@@ -228,71 +203,70 @@ export default function(editor) {
       },
 
       init() {
-        this.listenTo(this.model, 'change:attributes:checked', this.handleChecked);
+        this.listenTo(
+          this.model,
+          "change:attributes:checked",
+          this.handleChecked
+        );
       },
 
       handleChecked() {
-        this.el.checked = !!this.model.get('attributes')?.checked;
+        this.el.checked = !!this.model.get("attributes")?.checked;
       },
     },
   });
-
-
-
-
 
   // RADIO
   Components.addType(typeRadio, {
     extend: typeCheckbox,
-    isComponent: el => el.tagName == 'INPUT' && (el).type == 'radio',
+    isComponent: (el) => el.tagName == "INPUT" && el.type == "radio",
 
     model: {
       defaults: {
-        attributes: { type: 'radio' },
+        attributes: { type: "radio" },
       },
     },
   });
 
-
-
-
-
   Components.addType(typeButton, {
     extend: typeInput,
-    isComponent: el => el.tagName == 'BUTTON',
+    isComponent: (el) => el.tagName == "BUTTON",
 
     model: {
       defaults: {
-        tagName: 'button',
-        attributes: { type: 'button' },
-        text: 'Send',
+        tagName: "button",
+        attributes: { type: "button" },
+        text: "Send",
         traits: [
           {
-            name: 'text',
+            name: "text",
             changeProp: true,
-          }, {
-            type: 'select',
-            name: 'type',
+          },
+          {
+            type: "select",
+            name: "type",
             options: [
-              { value: 'button' },
-              { value: 'submit' },
-              { value: 'reset' },
-            ]
-        }]
+              { value: "button" },
+              { value: "submit" },
+              { value: "reset" },
+            ],
+          },
+        ],
       },
 
       init() {
         const comps = this.components();
-        const tChild =  comps.length === 1 && comps.models[0];
-        const chCnt = (tChild && tChild.is('textnode') && tChild.get('content')) || '';
-        const text = chCnt || this.get('text');
-        this.set('text', text);
-        this.on('change:text', this.__onTextChange);
-        (text !== chCnt) && this.__onTextChange();
+        const tChild = comps.length === 1 && comps.models[0];
+        const chCnt =
+          (tChild && tChild.is("textnode") && tChild.get("content")) || "";
+        const text = chCnt || this.get("text");
+        this.set("text", text);
+        this.on("change:text", this.__onTextChange);
+        text !== chCnt && this.__onTextChange();
       },
 
       __onTextChange() {
-        this.components(this.get('text'));
+        this.components(this.get("text"));
       },
     },
 
@@ -303,19 +277,15 @@ export default function(editor) {
     },
   });
 
-
-
-
-
   // LABEL
   Components.addType(typeLabel, {
-    extend: 'text',
-    isComponent: el => el.tagName == 'LABEL',
+    extend: "text",
+    isComponent: (el) => el.tagName == "LABEL",
 
     model: {
       defaults: {
-        tagName: 'label',
-        components: 'Label',
+        tagName: "label",
+        components: "Label",
         traits: [forTrait],
       },
     },

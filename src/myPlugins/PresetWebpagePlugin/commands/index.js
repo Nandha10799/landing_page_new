@@ -1,13 +1,14 @@
-import grapesjs from 'grapesjs';
+/* eslint-disable import/no-anonymous-default-export */
+import grapesjs from "grapesjs";
 
-import openImport from './openImport';
+import openImport from "./openImport";
 import {
   cmdImport,
   cmdDeviceDesktop,
   cmdDeviceTablet,
   cmdDeviceMobile,
-  cmdClear
-} from './../consts';
+  cmdClear,
+} from "./../consts";
 
 export default (editor, config) => {
   const { Commands } = editor;
@@ -15,17 +16,19 @@ export default (editor, config) => {
 
   Commands.add(cmdImport, openImport(editor, config));
   Commands.add(cmdDeviceDesktop, {
-    run: ed => ed.setDevice('Desktop'),
+    run: (ed) => ed.setDevice("Desktop"),
     stop: () => {},
   });
   Commands.add(cmdDeviceTablet, {
-    run: ed => ed.setDevice('Tablet'),
+    run: (ed) => ed.setDevice("Tablet"),
     stop: () => {},
   });
   Commands.add(cmdDeviceMobile, {
-    run: ed => ed.setDevice('Mobile portrait'),
+    run: (ed) => ed.setDevice("Mobile portrait"),
     stop: () => {},
   });
-  Commands.add(cmdClear, e => window.confirm(txtConfirm) && e.runCommand('core:canvas-clear'));
-  
-}
+  Commands.add(
+    cmdClear,
+    (e) => window.confirm(txtConfirm) && e.runCommand("core:canvas-clear")
+  );
+};

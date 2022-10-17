@@ -1,8 +1,8 @@
 /* eslint-disable import/no-anonymous-default-export */
 import "bootstrap/dist/css/bootstrap.css";
 export default (editor, opts = {}) => {
-    const bm = editor.BlockManager;
-    const style = `<style>
+  const bm = editor.BlockManager;
+  const style = `<style>
     html,
     body {
       position: ;
@@ -51,15 +51,15 @@ export default (editor, opts = {}) => {
     }
   </style>
     `;
-    bm.add(opts.name, {
-      label: `
+  bm.add(opts.name, {
+    label: `
       <i class="fa fa-arrows-h" style="font-size: 30px;"></i>
       <div class="gjs-block-label">
         ${opts.name}
       </div>
       `,
-      category: opts.category,
-      content: `
+    category: opts.category,
+    content: `
       <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
@@ -78,8 +78,5 @@ export default (editor, opts = {}) => {
     </div>${style}
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     `,
-    });
-  };
-
-
-  
+  });
+};
