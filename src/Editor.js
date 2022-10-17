@@ -10,9 +10,9 @@ import navBarPlugin from "./myPlugins/NavBarPlugin";
 import swiperPlugin from "./myPlugins/SwiperPlugin";
 import starRatePlugin from "./myPlugins/StarRate";
 import countDownPlugin from "./myPlugins/CountDownPlugin";
-import emojiPicker from "./myPlugins/Emojipicker";
-
-
+import sideBar from "./myPlugins/TailwindPlugin/Sidebar";
+import Jswiper from "./myPlugins/Jswiper";
+import Table from './myPlugins/Table';
 
 
 
@@ -28,17 +28,10 @@ function Editor() {
                 swiperPlugin,
                 starRatePlugin,
                 countDownPlugin,
-                emojiPicker,
+                sideBar,
+                Jswiper,
+                Table
             ],
-            pluginsOpts: {
-                basicPlugin: {},
-                presetWebpage:{},
-                formsPlugin:{},
-                extraPlugin:{},
-                navBarPlugin:{},
-                swiperPlugin:{},
-                starRatePlugin:{},
-            },
             allowScripts: true,
             storageManager: {
                 type: 'local', 
