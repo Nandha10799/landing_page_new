@@ -10,14 +10,10 @@ import navBarPlugin from "./myPlugins/NavBarPlugin";
 // import swiperPlugin from "./myPlugins/SwiperPlugin";
 // import starRatePlugin from "./myPlugins/StarRate";
 import countDownPlugin from "./myPlugins/CountDownPlugin";
-// import emojiPicker from "./myPlugins/Emojipicker";
-import pagination from "./myPlugins/Pagination";
-import tailwinds from "grapesjs-tailwind";
-import loginForm from "./myPlugins/loginForm";
-import collapses from "./myPlugins/collapse";
-import alerts from "./myPlugins/Alerts";
-import popovers from "./myPlugins/Popovers";
+// import tailwinds from "grapesjs-tailwind";
 // import theme from "./myPlugins/themeChanger";
+import table from "./myPlugins/Table";
+import jswiper from "./myPlugins/Jswiper";
 
 function Editor() {
   const [componentSelected, setComponentSelected] = useState(false);
@@ -33,14 +29,10 @@ function Editor() {
         // swiperPlugin,
         // starRatePlugin,
         countDownPlugin,
-        // emojiPicker,
-        pagination,
-        tailwinds,
-        loginForm,
+        jswiper,
+        // tailwinds,
         // theme,
-        collapses,
-        alerts,
-        popovers,
+        table,
       ],
       pluginsOpts: {
         basicPlugin: {},

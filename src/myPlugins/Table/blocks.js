@@ -1,7 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default (editor, opts = {}) => {
     const blcm = editor.BlockManager;
-    const style = `<style>#ceo th,
+    const style = `<style>
+    #ceo {
+      width:100%;
+    }
+    #ceo th,
     #ceo td {
       padding: 10px 30px;
     }
